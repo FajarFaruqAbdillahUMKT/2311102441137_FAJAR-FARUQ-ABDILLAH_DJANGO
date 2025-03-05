@@ -13,6 +13,10 @@
 
 - ⚡ Fun fact **i play age of empire 2 de**
 
+- This website is a personal website that contains my personal data and information about me. 
+I created this website using Django. 
+- To run this website, you need to clone this GitHub repository.
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://instagram.com/fajarrabd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="fajarrabd" height="30" width="40" /></a>
