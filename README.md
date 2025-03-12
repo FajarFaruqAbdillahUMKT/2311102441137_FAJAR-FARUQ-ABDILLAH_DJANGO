@@ -14,8 +14,49 @@
 - ⚡ Fun fact **i play age of empire 2 de**
 
 - This website is a personal website that contains my personal data and information about me. 
-I created this website using Django. 
-- To run this website, you need to clone this GitHub repository.
+I created this website using Django.
+- ## Ada apa saja di website ini?
+
+1. Halaman Utama - Menampilkan ringkasan dari masing-masing halaman.
+2. Halaman Projek - Menampilkan projek apa saja yang telah saya buat.
+3. Halaman Blog - Menampilkan tulisan yang saya tulis.
+- ## How to Run the Project
+
+1. Clone the project
+
+```shell
+git clone https://github.com/FajarFaruqAbdillahUMKT/2311102441137_FAJAR-FARUQ-ABDILLAH_DJANGO.git
+```
+
+2. Create a virtual environment
+
+```shell
+# Universal Python
+python -m venv .venv
+```
+
+or in some cases, use
+
+```shell
+# Python 3 Specified
+python3 -m venv .venv
+```
+
+3. Activate .venv
+
+```shell
+# Windows
+.venv\Scripts\activate
+
+# macOS/Linux
+source .venv/bin/activate
+```
+
+4. Install dependency
+
+```shell
+pip install django
+```
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
