@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def home(request):
-    template_name = 'home.html'
+    template_name = 'home-1.html'
     context = {
         'title': 'Fajar Faruq',
         'description': 'Developer Newbie',
@@ -11,11 +11,18 @@ def home(request):
     }
     return render(request, template_name, context)
 
-def about(request):
-    template_name = 'about.html'
+def service(request):
+    template_name = 'service-frl.html'
     context = {
-        'title': 'About Me',
-        'description': 'Tentang Saya',
-        'body': 'Halaman About'
+
     }
+    return render(request, template_name, context)
+
+def contact(request):
+    template_name = 'contact-frl.html'
+    context = {
+
+        }
+
+
     return render(request, template_name, context)

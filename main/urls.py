@@ -23,13 +23,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from .views import home
-from .views import about
+from .views import contact
+from .views import service
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('about/', about, name='about'),
-
+    path('contact/', contact, name='contact'),
+    path('service/', service, name='service'),
 ]
 
 ################## Untuk Media ##################
