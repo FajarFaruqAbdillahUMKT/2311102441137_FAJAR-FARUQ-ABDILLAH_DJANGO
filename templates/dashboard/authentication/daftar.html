@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="h-full" data-theme="true" data-theme-mode="light" dir="ltr" lang="en">
+    <head>
+        <title>Metronic - Tailwind CSS Sign Up</title>
+        <meta charset="utf-8" />
+        <meta content="follow, index" name="robots" />
+        <link href="https://127.0.0.1:8001/metronic-tailwind-html/demo8/authentication/classic/sign-up/index.html" rel="canonical" />
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+        <meta content="Sign up page, powered by Tailwind CSS" name="description" />
+        <meta content="@keenthemes" name="twitter:site" />
+        <meta content="@keenthemes" name="twitter:creator" />
+        <meta content="summary_large_image" name="twitter:card" />
+        <meta content="Metronic - Tailwind CSS Sign Up" name="twitter:title" />
+        <meta content="Sign up page, powered by Tailwind CSS" name="twitter:description" />
+        <meta content="assets/media/app/og-image.png" name="twitter:image" />
+        <meta content="https://127.0.0.1:8001/metronic-tailwind-html/demo8/authentication/classic/sign-up/index.html" property="og:url" />
+        <meta content="en_US" property="og:locale" />
+        <meta content="website" property="og:type" />
+        <meta content="@keenthemes" property="og:site_name" />
+        <meta content="Metronic - Tailwind CSS Sign Up" property="og:title" />
+        <meta content="Sign up page, powered by Tailwind CSS" property="og:description" />
+        <meta content="assets/media/app/og-image.png" property="og:image" />
+        <link href="{% static 'dashboard/media/app/apple-touch-icon.png' %}" rel="apple-touch-icon" sizes="180x180" />
+        <link href="{% static 'dashboard/media/app/favicon-32x32.png' %}" rel="icon" sizes="32x32" type="image/png" />
+        <link href="{% static 'dashboard/media/app/favicon-16x16.png' %}" rel="icon" sizes="16x16" type="image/png" />
+        <link href="{% static 'dashboard/media/app/favicon.ico' %}" rel="shortcut icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="{% static 'dashboard/vendors/apexcharts/apexcharts.css' %}" rel="stylesheet" />
+        <link href="{% static 'dashboard/vendors/keenicons/styles.bundle.css' %}" rel="stylesheet" />
+        <link href="{% static 'dashboard/css/styles.css' %}" rel="stylesheet" />
+        <style>
+            .page-bg {
+                background-image: url({% static "dashboard/media/images/2600x1200/bg-10.png" %});
+            }
+            .dark .page-bg {
+                background-image: url({% static "dashboard/media/images/2600x1200/bg-10-dark.png" %});
+            }
+        </style>
+    </head>
+    <body class="antialiased flex h-full text-base text-gray-700 dark:bg-coal-500">
+        <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
+            <div class="card max-w-[370px] w-full">
+                <form action="{% url 'dashboard:signup' %}" class="card-body flex flex-col gap-5 p-10" id="sign_up_form" method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="text-red-500 text-sm">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if messages %}
+                        <div class="text-red-500 text-sm">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="text-center mb-2.5">
+                        <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">
+                            Daftar
+                        </h3>
+                        <div class="flex items-center justify-center">
+                            <span class="text-2sm text-gray-700 me-1.5">
+                                Sudah punya akun?
+                            </span>
+                            <a class="text-2sm link" href="{% url 'dashboard:login' %}">
+                                Masuk
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="form-label text-gray-900">Username</label>
+                        <input class="input" name="username" placeholder="Masukkan Username" type="text" value="{{ form.username.value|default_if_none:'' }}" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="form-label text-gray-900">Email</label>
+                        <input class="input" name="user_email" placeholder="email@email.com" type="text" value="{{ form.user_email.value|default_if_none:'' }}" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="form-label font-normal text-gray-900">Kata Sandi</label>
+                        <div class="input" data-toggle-password="true">
+                            <input name="user_password" placeholder="Masukkan Kata Sandi" type="password" value="" />
+                            <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                                <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden"></i>
+                                <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="form-label font-normal text-gray-900">Konfirmasi Kata Sandi</label>
+                        <div class="input" data-toggle-password="true">
+                            <input name="user_password_confirm" placeholder="Masukkan Ulang Kata Sandi" type="password" value="" />
+                            <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                                <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden"></i>
+                                <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <label class="checkbox-group">
+                        <input class="checkbox checkbox-sm" name="check" type="checkbox" value="1" {% if form.check.value %}checked{% endif %} />
+                        <span class="checkbox-label">Saya setuju dengan <a class="text-2sm link" href="#">Syarat & Ketentuan</a></span>
+                    </label>
+                    <button class="btn btn-primary flex justify-center grow">Daftar</button>
+                </form>
+            </div>
+        </div>
+        <script src="{% static 'dashboard/js/core.bundle.js' %}"></script>
+        <script src="{% static 'dashboard/vendors/apexcharts/apexcharts.min.js' %}"></script>
+    </body>
+</html>

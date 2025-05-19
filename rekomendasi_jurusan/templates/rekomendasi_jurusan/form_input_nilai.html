@@ -1,0 +1,39 @@
+{% extends 'dashboard/base.html' %} {% load crispy_forms_tags %} {% block title %}Input Nilai untuk Rekomendasi Jurusan{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Formulir Input Nilai Mata Kuliah</h2>
+    <p>Silakan masukkan nilai Anda untuk setiap mata kuliah (skala 0-100).</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.nama_mahasiswa.label_tag }}
+        {{ form.nama_mahasiswa }}
+        <br><br>
+        {{ form.nim.label_tag }}
+        {{ form.nim }}
+        <hr>
+
+        <h5>Nilai Mata Kuliah:</h5>
+        {% for field in form %}
+            {% if field.name != 'nama_mahasiswa' and field.name != 'nim' %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary mt-3">Dapatkan Rekomendasi</button>
+    </form>
+</div>
+
+{% endblock %}

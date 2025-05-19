@@ -1,0 +1,106 @@
+{#{% extends 'dashboard/base.html' %}#}
+{% load static %}
+
+{#{% block content %}#}
+
+<!DOCTYPE html>
+<html class="h-full" data-theme="true" data-theme-mode="light" dir="ltr" lang="en">
+<head>
+    <title>
+        Metronic - Tailwind CSS
+    </title>
+    <meta charset="utf-8"/>
+    <meta content="follow, index" name="robots"/>
+    <link href="{% url 'dashboard:dashboard' %}" rel="canonical"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="@keenthemes" name="twitter:site"/>
+    <meta content="@keenthemes" name="twitter:creator"/>
+    <meta content="summary_large_image" name="twitter:card"/>
+    <meta content="Metronic - Tailwind CSS " name="twitter:title"/>
+    <meta content="" name="twitter:description"/>
+    <meta content="dashboard/media/app/og-image.png" name="twitter:image"/>
+    <meta content="https://127.0.0.1:8001/metronic-tailwind-html/demo8/index.html" property="og:url"/>
+    <meta content="en_US" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="@keenthemes" property="og:site_name"/>
+    <meta content="Metronic - Tailwind CSS " property="og:title"/>
+    <meta content="" property="og:description"/>
+    <meta content="dashboard/media/app/og-image.png" property="og:image"/>
+    <link href="{% static 'dashboard/media/app/apple-touch-icon.png' %}" rel="apple-touch-icon" sizes="180x180"/>
+    <link href="{% static 'dashboard/media/app/favicon-32x32.png' %}" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="{% static 'dashboard/media/app/favicon-16x16.png' %}" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="{% static 'dashboard/media/app/favicon.ico' %}" rel="shortcut icon"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="{% static 'dashboard/vendors/apexcharts/apexcharts.css' %}" rel="stylesheet"/>
+    <link href="{% static 'dashboard/vendors/keenicons/styles.bundle.css' %}" rel="stylesheet"/>
+    <link href="{% static 'dashboard/css/styles.css' %}" rel="stylesheet"/>
+</head>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Masuk</h3>
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Email atau kata sandi salah. Silakan coba lagi.
+                        </div>
+                    {% endif %}
+                    <form method="post" action="{% url 'dashboard:login' %}">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="username"
+                                   placeholder="email@email.com" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Kata Sandi</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Masukkan Kata Sandi" required>
+                                <button class prophets="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <a href="{% url 'dashboard:password_reset' %}" class="text-sm text-primary float-end mt-1">Lupa
+                                Kata Sandi?</a>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                            <label class="form-check-label" for="remember">Ingat Saya</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Masuk</button>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <span class="text-sm">Belum punya akun? </span>
+                        <a href="{% url 'dashboard:signup' %}" class="text-sm text-primary">Daftar</a>
+                        <a href="{% url 'home' %}" class="text-sm text-primary">home</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Skrip untuk Toggle Kata Sandi -->
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const icon = this.querySelector('i');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    });
+</script>
+{#{% endblock %}#}
