@@ -1,0 +1,16 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Daftar Mahasiswa</h1>
+<ul>
+{% for mahasiswa in mahasiswas %}
+    <li>{{ mahasiswa.nama }} ({{ mahasiswa.nim }})
+        <a href="{% url 'update_mahasiswa' mahasiswa.id %}">Edit</a>
+        <a href="{% url 'delete_mahasiswa' mahasiswa.id %}">Hapus</a>
+    </li>
+{% endfor %}
+</ul>
+<a href="{% url 'create_mahasiswa' %}">Tambah Mahasiswa</a>
+{% endblock %}
