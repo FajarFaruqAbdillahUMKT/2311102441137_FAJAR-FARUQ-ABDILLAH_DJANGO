@@ -15,6 +15,7 @@ urlpatterns = [
 
     # Main Frontend
     path('', v.home, name='home'),
+    path('teamfrl/', v.teamfrl, name='teamfrl'),
 
     # path('dashboard/', include('dashboard.urls')),
     path('dashboard/', include('dashboard.urls', namespace='dashboard')),

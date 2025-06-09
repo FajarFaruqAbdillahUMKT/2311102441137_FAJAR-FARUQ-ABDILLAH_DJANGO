@@ -21,12 +21,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
 
     # Aplikasi kustom
     'dashboard',
     'rekomendasi_jurusan',
     'crispy_forms',
     'crispy_bootstrap5',
+
 ]
 
 MIDDLEWARE = [

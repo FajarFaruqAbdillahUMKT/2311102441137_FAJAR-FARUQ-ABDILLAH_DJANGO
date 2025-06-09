@@ -73,10 +73,18 @@
         <br>
         <div class="mil-text-with-button ">
 
-            <span class="mil-up"
+            <span class="mil-up mil-mb60 mil-mt60 mil-a2"
                   style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
                 <a href="{% url 'rekomendasi_jurusan:input_nilai_spk' %}"
                    class="mil-btn mil-a2 mil-c-gone">Mulai Pilih Jurusan Sekarang</a></span>
+        </div>
+        <br>
+        <div class="mil-text-with-button ">
+
+            <span class="mil-up mil-mb60 mil-mt60 mil-a2"
+                  style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+                <a href="{% url 'admin:index' %}"
+                   class="mil-btn mil-a2 mil-c-gone">login sebagai admin</a></span>
         </div>
         <br>
 
@@ -251,12 +259,15 @@
     <div class="container">
         <div class="mil-half-container mil-up">
             <div class="mil-text-box mil-g-m1 mil-p-160-160">
-                <p class="mil-stylized mil-m2 mil-mb60 mil-up">Contact</p>
-                <h2 class="mil-display3 mil-mb60 mil-m4 mil-up">Let’s <span class="mil-a1">make</span><br>an <span
-                        class="mil-a1">impact</span><br>together.</h2>
-                <p class="mil-text-md mil-deco-text mil-shortened mil-up">Welcome to <span class="mil-a2">PIXY</span>
-                    where your ideas come to life. We specialize in crafting unique brands, captivating advertising
-                    campaigns, and effective digital strategies.</p>
+                <p class="mil-stylized mil-m2 mil-mb60 mil-up">HUBUNGI KAMI</p>
+                <h2 class="mil-display3 mil-mb60 mil-m4 mil-up">KAMI TERBUKA UNTUK <span
+                        class="mil-a1">MASUKAN</span><br>& <span
+                        class="mil-a1">SARAN</span><br>ANDA.</h2>
+                <p class="mil-text-md mil-deco-text mil-shortened mil-up">Ini adalah <span
+                        class="mil-a2">proyek studi</span>
+                    kami dari Praktikum
+                    Pemrograman Web Lanjut. Kami sangat menghargai setiap pertanyaan, kritik membangun, atau saran yang
+                    dapat membantu kami berkembang.</p>
             </div>
             <div class="mil-image-box">
                 <div class="mil-image-frame">
@@ -268,13 +279,13 @@
         </div>
         <div class="row mil-aic mil-jcb mil-no-g">
             <div class="col-lg-4 mil-992-gone">
-                <p class="mil-text-sm mil-up">We accept your requests 24/7. Feel free to <a href="contact-frl.html"
-                                                                                            class="mil-text-link mil-a2 mil-c-gone">write
-                    to us</a> whenever it is convenient for you</p>
+                <p class="mil-text-sm mil-up">Kami menantikan tanggapan atau pertanyaan lebih lanjut dari Anda. Jangan ragu untuk menghubungi kami. Silakan sampaikan  <a
+                        href="contact-frl.html"
+                        class="mil-text-link mil-a2 mil-c-gone">pesan Anda</a> kapan pun.</p>
             </div>
             <div class="col-lg-6">
                 <div class="mil-button-pad mil-a2">
-                    <span class="mil-up"><a href="contact-frl.html" class="mil-btn mil-btn-border mil-c-gone">Get in touch</a></span>
+                    <span class="mil-up"><a href="contact-frl.html" class="mil-btn mil-btn-border mil-c-gone">HUBUNGI KAMI</a></span>
                 </div>
             </div>
         </div>
@@ -289,7 +300,7 @@
                     <h2 class="mil-head1 mil-mb60 mil-up">Meet Our <span class="mil-a1">Team</span></h2>
                 </div>
                 <div class="col-lg-6">
-                    <p class="mil-stylized mil-m1 mil-tar mil-768-tal mil-mb60 mil-up"><a href="team-frl.html"
+                    <p class="mil-stylized mil-m1 mil-tar mil-768-tal mil-mb60 mil-up"><a href="{% url 'teamfrl' %}"
                                                                                           class="mil-arrow-link mil-c-gone">View
                         all members</a></p>
                 </div>
@@ -313,7 +324,7 @@
                                     <li><a href="#." target="_blank" data-no-swup><i class="far fa-circle"></i></a></li>
                                     <li><a href="#." target="_blank" data-no-swup><i class="far fa-circle"></i></a></li>
                                 </ul>
-                                <p class="mil-stylized mil-m2">UI/UX Designer</p>
+                                <p class="mil-stylized mil-m2">Programmer</p>
                             </div>
                         </div>
                     </div>
@@ -321,7 +332,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="mil-team-card mil-mb30 mil-768-mb-15 mil-up">
                         <div class="mil-hover-frame">
-                            <img src="{% static 'main/img/team/dino.jpg' %}" alt="team member" class="mil-scale-img"
+                            <img src="{% static 'main/img/team/dini.jpg' %}" alt="team member" class="mil-scale-img"
                                  data-value-1="1.20" data-value-2="1">
                         </div>
                         <div class="mil-hover-overlay">
@@ -390,16 +401,20 @@
                 <div class="mil-obj-1"></div>
                 <div class="mil-obj-2"></div>
             </div>
-            <p class="mil-stylized mil-m2 mil-mb60 mil-tac mil-up">Explore our agency</p>
-            <h2 class="mil-head1 mil-rubber mil-tac mil-mb60 mil-up">Pixy is a <span class="mil-a1">creative</span>
-                agency that transforms <span class="mil-a1">ideas</span> into masterpieces. We craft <span
-                        class="mil-a1">design</span> magic, breathe new life into brands, and make the impossible <span
-                        class="mil-a1">possible</span>. Choose <span class="mil-a1">Pixy</span> because we are worth it!
+            <p class="mil-stylized mil-m2 mil-mb60 mil-tac mil-up">EKSPLORASI KARYA KAMI</p>
+            <h2 class="mil-head1 mil-rubber mil-tac mil-mb60 mil-up">INI ADALAH PROYEK <span
+                    class="mil-a1">INOVATIF</span>
+                DARI PRAKTIKUM PEMROGRAMAN WEB LANJUT, MENTRANSFORMASIKAN <span class="mil-a1">IDE</span> MENJADI SOLUSI
+                DIGITAL. KAMI MEMBANGUN <span
+                        class="mil-a1">APLIKASI</span> DENGAN TEKNOLOGI MODERN, MENGOPTIMALKAN <span
+                        class="mil-a1">PERFORMA</span>, DAN MEWUJUDKAN <span class="mil-a1">PENGALAMAN PENGGUNA</span>
+                YANG TERBAIK. LIHAT LEBIH DEKAT KARENA KAMI BERHASIL!
             </h2>
             <div class="mil-text-with-button mil-mb60">
-                <p class="mil-text-sm mil-tar mil-768-tac mil-up">We've been working for several years to build a
-                    portfolio <br>that truly reflects our diversity.</p>
-                <span class="mil-up"><a href="portfolio-1-frl.html" class="mil-btn mil-a2 mil-c-gone">View portfolio</a></span>
+                <p class="mil-text-sm mil-tar mil-768-tac mil-up">Proyek ini didedikasikan untuk menerapkan pengetahuan
+                    teoritis ke dalam praktik pengembangan web yang nyata.</p>
+                <span class="mil-up"><a href="{% url 'home' %}"
+                                        class="mil-btn mil-a2 mil-c-gone">DETAIL PROYEK</a></span>
             </div>
         </div>
         <div class="mil-tapes-frame">

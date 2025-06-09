@@ -7,6 +7,11 @@ def home(request):
     context = {}
     return render(request, template_name, context)
 
+def teamfrl(request):
+    template_name = 'main/team-frl.html'
+    context = {}
+    return render(request, template_name, context)
+
 # def login(request):
 #     template_name = 'dashboard/login.html'
 #     context = {}
