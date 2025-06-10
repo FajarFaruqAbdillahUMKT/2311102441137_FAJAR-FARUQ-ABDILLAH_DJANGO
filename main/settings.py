@@ -15,6 +15,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin', # Aplikasi untuk tampilan admin yang lebih baik
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,6 +30,7 @@ INSTALLED_APPS = [
     'rekomendasi_jurusan',
     'crispy_forms',
     'crispy_bootstrap5',
+    'crispy_tailwind',
 
 ]
 
@@ -106,9 +109,79 @@ AUTH_USER_MODEL = 'dashboard.CustomUser'
 # Login and Logout Redirects
 LOGIN_URL = 'dashboard:login'
 LOGIN_REDIRECT_URL = 'dashboard:list_mahasiswa'
-LOGOUT_REDIRECT_URL = 'dashboard:login'
+LOGOUT_REDIRECT_URL = ''
 
 # Crispy Forms Settings
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  # atau "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap5"  # atau "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"  # atau "bootstrap4"
+CRISPY_TEMPLATE_PACK = "tailwind"  # atau "bootstrap4"\
+
+# ... (bagian bawah settings.py, setelah INSTALLED_APPS, dll.)
+
+# ---------------- JAZZMIN CONFIGURATION ----------------
+JAZZMIN_SETTINGS = {
+    # Judul pada tab browser dan halaman login
+    "site_title": "Admin SPK",
+
+    # Judul di header halaman admin (logo teks)
+    "site_header": "SPK Penjurusan",
+
+    # Teks/logo kecil di pojok kiri atas
+    "site_brand": "SPK Admin",
+
+    # Logo untuk halaman login. Letakkan file gambar di folder 'static/' aplikasi Anda
+    # "login_logo": "images/logo-login.png",
+
+    # Logo untuk di pojok kiri atas.
+    # "site_logo": "images/logo-sidebar.png",
+
+    # Teks selamat datang di halaman login
+    "welcome_sign": "Selamat Datang! Silakan Login",
+
+    # Hak Cipta di bagian footer
+    "copyright": "Proyek SPK Mahasiswa 2025",
+
+    # Model yang ingin Anda cari di search bar global
+    "search_model": ["auth.User", "rekomendasi_jurusan.Mahasiswa"],
+
+    ############
+    # UI Tweaks
+    ############
+    # Tema, ada banyak pilihan. Contoh: "cerulean", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "pulse", "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "yeti"
+    "theme": "litera",
+
+    # Untuk tema gelap, gunakan "slate" atau "darkly"
+    # "theme": "darkly",
+
+    # Opsi untuk UI
+    "show_ui_builder": False,  # Ubah jadi True jika ingin mencoba mengubah tema secara live
+
+    "changeform_format": "horizontal_tabs",
+    # "changeform_format": "single_tabs",
+    # "changeform_format": "collapsible",
+
+    "topmenu_links": [
+        # Url bisa berupa nama view: 'admin:index'
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        # Link eksternal
+        # {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+
+        # Model Admin
+        {"model": "rekomendasi_jurusan.Mahasiswa"},
+    ],
+
+    # Kustomisasi menu/sidebar
+    "side_menu_icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "rekomendasi_jurusan.Mahasiswa": "fas fa-user-graduate",
+        "rekomendasi_jurusan.Kriteria": "fas fa-list-ol",
+        "rekomendasi_jurusan.Alternatif": "fas fa-tasks",
+        "rekomendasi_jurusan.NilaiMataKuliah": "fas fa-star-half-alt",
+        "rekomendasi_jurusan.HasilRekomendasi": "fas fa-chart-bar",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+}

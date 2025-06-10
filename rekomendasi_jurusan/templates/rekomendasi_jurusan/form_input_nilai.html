@@ -1,39 +1,44 @@
-{% extends 'dashboard/base.html' %} {% load crispy_forms_tags %} {% block title %}Input Nilai untuk Rekomendasi Jurusan{% endblock %}
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Input Nilai untuk Rekomendasi Jurusan{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Formulir Input Nilai Mata Kuliah</h2>
-    <p>Silakan masukkan nilai Anda untuk setiap mata kuliah (skala 0-100).</p>
+{# Container utama dari base.html Anda adalah 'container-fixed' #}
+<div class="container-fixed">
+    {# Menggunakan kelas dari tema Metronic Tailwind Anda untuk container #}
+    <div class="flex flex-col bg-light dark:bg-coal-500 p-5 lg:p-8 rounded-lg">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">
+            Formulir Input Nilai Mata Kuliah
+        </h2>
+        <p class="text-sm text-gray-600 mb-6">
+            Silakan masukkan nilai Anda untuk setiap mata kuliah (skala 0-100).
+        </p>
 
-    <form method="post">
-        {% csrf_token %}
+        <form method="post" novalidate>
+            {% csrf_token %}
 
-        {{ form.nama_mahasiswa.label_tag }}
-        {{ form.nama_mahasiswa }}
-        <br><br>
-        {{ form.nim.label_tag }}
-        {{ form.nim }}
-        <hr>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                {{ form.nama_mahasiswa|as_crispy_field }}
+                {{ form.nim|as_crispy_field }}
+            </div>
 
-        <h5>Nilai Mata Kuliah:</h5>
-        {% for field in form %}
-            {% if field.name != 'nama_mahasiswa' and field.name != 'nim' %}
-                <div class="mb-3">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="invalid-feedback d-block">
-                            {% for error in field.errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
+            <hr class="border-gray-200 dark:border-coal-400 my-4">
+
+            <h5 class="text-lg font-semibold text-gray-800 mb-4">Nilai Mata Kuliah</h5>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+                {% for field in form %}
+                    {% if 'nilai_' in field.name %}
+                        {{ field|as_crispy_field }}
                     {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endfor %}
+            </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Dapatkan Rekomendasi</button>
-    </form>
+            <div class="mt-8 flex justify-end">
+                 {# Menggunakan kelas 'btn' dari tema Metronic Anda #}
+                 <button type="submit" class="btn btn-primary">Dapatkan Rekomendasi</button>
+            </div>
+        </form>
+    </div>
 </div>
-
 {% endblock %}

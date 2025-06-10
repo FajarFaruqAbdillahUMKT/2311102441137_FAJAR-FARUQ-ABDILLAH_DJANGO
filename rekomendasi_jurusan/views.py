@@ -84,7 +84,7 @@ def input_nilai_dan_rekomendasi(request):
     matriks_X_lengkap = matriks_keputusan_df.to_numpy()
 
     # =======================================================================
-    # BAGIAN 3: LOGIKA TOPSIS PADA MATRIKS LENGKAP (Logika Baru)
+    # BAGIAN 3: LOGIKA TOPSIS PADA MATRIKS LENGKAP
     # =======================================================================
     alternatif_list = Alternatif.objects.all()
 
