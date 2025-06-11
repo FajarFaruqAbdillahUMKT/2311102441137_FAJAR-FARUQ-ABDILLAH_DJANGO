@@ -9,14 +9,14 @@ from import_export.admin import ImportExportModelAdmin
 # =======================================================
 
 @admin.register(Kriteria)
-class KriteriaAdmin(admin.ModelAdmin):
+class KriteriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id','nama_kriteria', 'bobot_jrs', 'bobot_kc')
     search_fields = ('nama_kriteria',)
     list_per_page = 20
 
 
 @admin.register(Alternatif)
-class AlternatifAdmin(admin.ModelAdmin):
+class AlternatifAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('nama_alternatif', 'kode_alternatif')
     search_fields = ('nama_alternatif', 'kode_alternatif')
 
