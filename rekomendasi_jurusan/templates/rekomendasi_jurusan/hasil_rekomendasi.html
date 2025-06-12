@@ -1,78 +1,93 @@
 {% extends 'dashboard/base.html' %}
-
 {% block title %}Hasil Rekomendasi Jurusan{% endblock %}
 
 {% block content %}
 <div class="container-fixed">
-    {# Menggunakan container dan card yang sama dengan halaman form untuk konsistensi #}
     <div class="flex flex-col bg-light dark:bg-coal-500 p-5 lg:p-8 rounded-lg">
-
         <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
             Hasil Rekomendasi Fokus Penjurusan
         </h2>
-
         {% if form_data.nama_mahasiswa %}
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                Untuk Mahasiswa: <strong class="font-semibold text-gray-800 dark:text-gray-200">{{ form_data.nama_mahasiswa }}</strong>
-                {% if form_data.nim %}
-                    (NIM: {{ form_data.nim }})
-                {% endif %}
+                Untuk Mahasiswa: <strong class="font-semibold">{{ form_data.nama_mahasiswa }}</strong> (NIM: {{ form_data.nim }})
             </p>
         {% endif %}
 
-        {% if hasil %}
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Berikut adalah rekomendasi fokus penjurusan berdasarkan nilai preferensi TOPSIS:</p>
+        {# ========================================================= #}
+        {#     KONTROL TAMPILAN BERDASARKAN 4 KONDISI (BARU)      #}
+        {# ========================================================= #}
 
-            {# Wrapper untuk table agar bisa responsif jika diperlukan #}
-            <div class="overflow-x-auto relative shadow-md sm:rounded-lg border border-gray-200 dark:border-coal-400">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-coal-600 dark:text-gray-300">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Peringkat
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Nama Fokus Penjurusan
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Nilai Preferensi (V)
-                            </th>
-                        </tr>
-                    </thead>
+        {# --- KONDISI 1: SKOR TERLALU RENDAH --- #}
+        {% if jenis_rekomendasi == 'rendah' %}
+            <div class="p-4 mb-4 text-sm text-center text-red-800 rounded-lg bg-red-100 border border-red-400" role="alert">
+                <h3 class="font-bold text-lg mb-2">⚠️ Peringatan: Skor di Bawah Ambang Batas</h3>
+                <p>{{ konteks_tambahan.pesan }}</p>
+            </div>
+            <div class="text-center font-semibold mt-4">
+                <p>Skor Jaringan & Rekayasa Sistem: {{ skor_jrs|floatformat:4 }}</p>
+                <p>Skor Komputasi Cerdas: {{ skor_kc|floatformat:4 }}</p>
+            </div>
+
+        {# --- KONDISI 2: SKOR IMBANG (DAN TIDAK RENDAH) --- #}
+        {% elif jenis_rekomendasi == 'imbang' %}
+            <div class="p-4 mb-6 text-center text-blue-800 rounded-lg bg-blue-100 border border-blue-400" role="alert">
+                <h3 class="font-bold text-lg">🎉 Hasil Seimbang! Anda Cocok untuk Dua Fokus Penjurusan!</h3>
+            </div>
+            <p class="text-center text-gray-600 mb-6">Profil nilai Anda sama kuatnya untuk kedua jurusan. Pertimbangkan perbedaan fokus bobot di bawah ini untuk membantu Anda memilih.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="text-center p-4 bg-gray-100 rounded-lg border"><h4 class="font-bold text-lg text-primary">Jaringan & Rekayasa Sistem</h4><p class="font-mono text-xl">{{ skor_jrs|floatformat:4 }}</p></div>
+                <div class="text-center p-4 bg-gray-100 rounded-lg border"><h4 class="font-bold text-lg text-primary">Komputasi Cerdas</h4><p class="font-mono text-xl">{{ skor_kc|floatformat:4 }}</p></div>
+            </div>
+            <h4 class="text-lg font-semibold mb-2 mt-6">Perbandingan Fokus Kriteria</h4>
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg border">
+                <table class="w-full text-sm text-left"><thead class="text-xs uppercase bg-gray-100"><tr><th class="px-6 py-3">Kriteria</th><th class="px-6 py-3 text-center">Bobot JRS</th><th class="px-6 py-3 text-center">Bobot KC</th></tr></thead>
                     <tbody>
-                        {% for item in hasil %}
-                        <tr class="bg-light border-b dark:bg-coal-500 dark:border-coal-600 hover:bg-gray-50 dark:hover:bg-coal-700">
-                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                {{ forloop.counter }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ item.alternatif }}
-                            </td>
-                            <td class="px-6 py-4 font-mono text-gray-700 dark:text-gray-300">
-                                {{ item.nilai_v|floatformat:4 }}
-                            </td>
-                        </tr>
-                        {% endfor %}
+                    {% for p in konteks_tambahan.pembeda_jurusan %}
+                        <tr class="bg-white border-b"><td class="px-6 py-4 font-semibold">{{ p.nama }}</td><td class="px-6 py-4 text-center font-mono {% if p.highlight == 'jrs' %} text-primary font-bold{% endif %}">{{ p.bobot_jrs }}</td><td class="px-6 py-4 text-center font-mono {% if p.highlight == 'kc' %} text-primary font-bold{% endif %}">{{ p.bobot_kc }}</td></tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
 
-            <div class="mt-6 p-4 bg-primary-light dark:bg-primary-dark rounded-lg text-center">
-                <p class="text-base font-semibold text-primary-dark dark:text-primary-light">
-                    Rekomendasi Utama: <span class="text-lg">{{ hasil.0.alternatif }}</span>
-                </p>
-            </div>
-
+        {# --- KONDISI 3 & 4: REKOMENDASI NORMAL (JRS atau KC MENANG) --- #}
         {% else %}
-            <p class="text-center text-gray-500 mt-8">Tidak ada hasil rekomendasi yang dapat ditampilkan.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="flex flex-col justify-center">
+                    <p class="text-base text-gray-600">Rekomendasi Utama Anda adalah:</p>
+                    <h3 class="text-3xl font-bold text-primary mb-2">{{ hasil.0.alternatif.nama_alternatif }}</h3>
+                    <p class="mt-4 text-sm text-gray-600">Rekomendasi ini didasarkan pada profil nilai Anda berikut:</p>
+                    <ul class="list-disc list-inside mt-2 text-sm">
+                        {% for n in nilai_mentah %}<li><strong>{{ n.kriteria.nama_kriteria }}:</strong> {{ n.nilai_mentah }} / 100</li>{% endfor %}
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg"><h4 class="text-lg font-semibold text-center mb-2">Profil Nilai Anda</h4><canvas id="radarChart"></canvas></div>
+            </div>
+            <h4 class="text-lg font-semibold mb-4">Peringkat Lengkap</h4>
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg border"><table class="w-full text-sm text-left"><thead class="text-xs uppercase bg-gray-100"><tr><th class="px-6 py-3">Peringkat</th><th class="px-6 py-3">Fokus Penjurusan</th><th class="px-6 py-3">Nilai Preferensi (V)</th></tr></thead>
+                <tbody>
+                    {% for item in hasil %}<tr class="bg-white border-b"><td class="px-6 py-4 font-medium">{{ forloop.counter }}</td><td class="px-6 py-4 font-semibold">{{ item.alternatif.nama_alternatif }}</td><td class="px-6 py-4 font-mono">{{ item.skor|floatformat:4 }}</td></tr>{% endfor %}
+                </tbody></table>
+            </div>
         {% endif %}
 
         <div class="mt-8 flex justify-start">
-            <a href="{% url 'rekomendasi_jurusan:input_nilai_spk' %}" class="btn btn-light">
-                <i class="ki-filled ki-arrow-left"></i>
-                Kembali ke Form Input
-            </a>
+            <a href="{% url 'rekomendasi_jurusan:input_nilai_spk' %}" class="btn btn-light"><i class="ki-filled ki-arrow-left"></i> Kembali ke Form</a>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ block.super }}
+{# Script Chart.js hanya perlu dirender untuk kondisi normal (bukan imbang atau rendah) #}
+{% if jenis_rekomendasi != 'imbang' and jenis_rekomendasi != 'rendah' %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chartData = JSON.parse('{{ chart_data_json|safe }}');
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctx, { type: 'radar', data: { labels: chartData.labels, datasets: [{ label: 'Profil Nilai Anda (0-100)', data: chartData.nilai, backgroundColor: 'rgba(54, 162, 235, 0.2)', borderColor: 'rgba(54, 162, 235, 1)', borderWidth: 2 }] }, options: { scales: { r: { beginAtZero: true, max: 100 } } } });
+    });
+</script>
+{% endif %}
 {% endblock %}
